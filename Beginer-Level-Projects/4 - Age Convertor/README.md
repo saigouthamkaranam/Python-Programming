@@ -8,7 +8,7 @@
   - SUM
   - MULTIPLICATION
   - DIVISION  
-- 📌Round Function
+  - SUBSTRACTION
 - 📌f strings
 <br/>
 
