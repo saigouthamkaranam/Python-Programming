@@ -3,7 +3,8 @@
 ## Skill-Level: Beginner
 ## Language-Python
 <br/>
-## Concepts you understand by the end of this project
+### Concepts you understand by the end of this project
+<br/>
 -Print Statement
 -Input function
 -Variables Declaration
