@@ -1,4 +1,5 @@
 # 2 - BODY MASS INDEX(BMI) CALCULATOR
+## Description: Using this project we can Find the Body Mass Index of an individual based upon his Height and Weight.
 ## 📝Project - 02
 ## 🎓Skill-Level: Beginner
 ## 🎨Language-Python
