@@ -2,7 +2,6 @@
 ## Project - 01
 ## Skill-Level: Beginner
 ## Language-Python
-<br/>
 ### Concepts you understand by the end of this project
 <br/>
 - Print Statement
