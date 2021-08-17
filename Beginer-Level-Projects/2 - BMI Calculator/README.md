@@ -10,7 +10,7 @@
 - 📌If statements (How ever this u can skip this part)
 <br/>
 
-⚜ Challenge: for better complexity I have used If statements. You can skip this step and just print the BMI value if you feel its too complex At the momnent. <br/>
+⚜ Challenge: for better complexity I have used If statements. You can skip this step and just print the BMI value if you feel its too complex. <br/>
 <br/>
 _Feel free to download and edit the code💨_
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖<br/>
