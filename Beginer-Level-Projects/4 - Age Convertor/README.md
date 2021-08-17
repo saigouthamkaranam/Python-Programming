@@ -1,5 +1,5 @@
 # 4 - AGE CONVERTOR
-## Description: This project converts your age in years into no.of months, weeks, days and hours. Fun fact about this is using this project we can also display estimated balanced years by entering imaginery endage.
+## Description: This project converts your age in years into no.of months, weeks, days and hours. Fun fact about this is using this project we can also display estimated balanced years by entering imaginary endage.
 ## 📝Project - 03
 ## 🎓Skill-Level: Beginner
 ## 🎨Language-Python
