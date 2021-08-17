@@ -19,5 +19,7 @@ Final_value = round(withTip / n,2)
 print (f"\n\tYour total amount is:\t{total} \n\tTotal amount on adding tip: \t{withTip} \n\tEach member should pay: \t{Final_value}")
 print("\n\tThanks for using Goutham's Bill plus Tip Splitter")
 
+#I am using F-strings to print several variables values because:-> String concatination only works with string we cannot concatinate String and Int.
+#To know more about F-strings and how to use them visit https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python
 #Thank You ~K. SAI GOUTHAM. Visit my github profile for my projects https://www.githib.com/Gouthique
 #To run this project Click on this link https://replit.com/@Gouthique/BillSplitterwithtip-1#main.py or you can run manually in your text editor.
