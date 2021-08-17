@@ -11,5 +11,5 @@
 <br/>
 <br/>
 💡You can run the project by clicking down the link below 👇
-https://replit.com/@Gouthique/YouTibe-name-generator-start-1#main.py
+[click here to run]: https://replit.com/@Gouthique/YouTibe-name-generator-start-1#main.py
 
