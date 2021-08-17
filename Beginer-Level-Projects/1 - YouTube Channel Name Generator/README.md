@@ -4,10 +4,10 @@
 ## 🎨Language-Python
 ### ✨Concepts you understand by the end of this project:
 <br/>
-📌Print Statement
-📌Input function
-📌Variables Declaration
-📌Introduction to lists (How ever this u can skip this part)
+-📌Print Statement
+-📌Input function
+-📌Variables Declaration
+-📌Introduction to lists (How ever this u can skip this part)
 <br/>
 <br/>
 💡You can run the project by clicking down the link below 👇
