@@ -1,5 +1,8 @@
 # 1 - YOUTUBE CHANNEL NAME GENERATOR
 ## Description: This project suggests some suffixes that can be added at the end of your channel name. Using this project you can generate a channel name for your YouTube or any other channel.
+
+![Youtube Name Generator - by goutham Logo]()
+
 ## 📝Project - 01
 ## 🎓Skill-Level: Beginner
 ## 🎨Language-Python
@@ -9,6 +12,7 @@
 - 📌Variables Declaration
 - 📌Introduction to lists (How ever this u can skip this part)
 <br/>
+
 
 _Feel free to download and edit the code💨_
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖<br/>
