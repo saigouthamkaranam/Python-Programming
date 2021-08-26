@@ -1,5 +1,5 @@
 # 7 - PASSWORD GENERATOR
-## Description: As name suggests this project is a random password generator, enter the no.of characters, numbers and symbols that you want to put in yout password. This password generates random password everytime! 
+## Description: As the name suggests this project is a random password generator, enter the no.of characters, numbers and symbols that you want to put in yout password. This password generates random password everytime! 
 ## 📝Project - 07
 ## 🎓Skill-Level: Beginner
 ## 🎨Language-Python
