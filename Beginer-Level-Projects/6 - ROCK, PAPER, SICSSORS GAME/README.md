@@ -1,4 +1,4 @@
-# 6 - TREASURE ISLAND
+# 6 - ROCK PAPER SICSSORS GAME
 ## Description: This project is a fun game. You can say that this is more like an adventure - RPG game, where you will be hit with a series of questions and you need to pick the appropriate answers for those series of questions till the end of the game. You will understand it better when u actually play it!
 ## 📝Project - 06
 ## 🎓Skill-Level: Beginner
@@ -10,7 +10,8 @@
    - Nested If Statements
    - If-Elif Ladder 
 - 📌Ascii art generation (Completely Optional)
-- 📌f strings
+- 📌Python Lists
+- 📌Random Module
 <br/>
 
 <br/>
