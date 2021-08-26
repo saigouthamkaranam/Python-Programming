@@ -9,7 +9,7 @@ This repo Consists of the different projects related to python programming that 
 
 # 📌 TABLE OF CONTENTS
 
-### ✨ BEGINNER LEVEL PROJECTS 
+### ✨ BEGINNER LEVEL PROJECTS ✨
   
   |Sno |Title  |
   --- | --- | 
