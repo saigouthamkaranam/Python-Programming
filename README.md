@@ -24,5 +24,7 @@ This repo Consists of the different projects related to python programming that 
   |9|[Caeser Cipher]|
   |10|[To Be Annnounced]|
   |11|[Under Progress..]|
+  |12|[To Be Annnounced]|
+  |13|[Under Progress..]|
 
 ✨Thanks for visiting✨
