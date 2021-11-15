@@ -22,8 +22,8 @@ This repo Consists of the different projects related to python programming that 
   |7|[Password Generator](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/7%20-%20Password%20Generator)|
   |8|[Hangman Game](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/8%20-%20Hangman%20Game)|
   |9|[Caeser Cipher]|
-  |10|[To Be Annnounced]|
-  |11|[Under Progress..]|
+  |10|[The Auction Program]|
+  |11|[The Black Jack]|
   |12|[To Be Annnounced]|
   |13|[Under Progress..]|
 
