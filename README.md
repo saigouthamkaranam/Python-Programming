@@ -2,7 +2,7 @@
 
 > A curated collection of Python projects, practice problems, and learning notes — built while going from zero to backend engineer.
 
-**[📖 View Python Cheatsheet →](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet.html)**
+**[📖 View Python Cheatsheet →](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet/cheatsheet.html)**
 
 ---
 
@@ -71,11 +71,11 @@ Structured learning notes written while studying Python — from variables to ad
 
 | File | Covers |
 |---|---|
-| [`cheatsheet.html`](./Python-Notes/cheatsheet.html) | Full visual cheatsheet — Beginner to Advanced |
-| [`README_basics.md`](./Python-Notes/README_basics.md) | Chapter 1 — Variables, Loops, Functions, Data Structures |
-| [`README.md`](./Python-Notes/README.md) | Chapter 2 — OOP, Inheritance, Decorators, MRO |
+| [`cheatsheet.html`](./Python-Notes/cheatsheet/cheatsheet.html) | Full visual cheatsheet — Beginner to Advanced |
+| [`Python Basics`](./Python-Notes/basic-python/readme.md) | Chapter 1 — Variables, Loops, Functions, Data Structures |
+| [`README.md`](./Python-Notes/advance-python/readme.md) | Chapter 2 — OOP, Inheritance, Decorators, MRO |
 
-**👉 [View the live styled cheatsheet](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet.html)**
+**👉 [View the live styled cheatsheet](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet/cheatsheet.html)**
 
 ---
 
