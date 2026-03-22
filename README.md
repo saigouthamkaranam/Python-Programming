@@ -68,7 +68,7 @@ Hands-on projects built while learning Python fundamentals — covering function
 | 10 | The Auction Program | Simulates a blind auction |
 | 11 | The Blackjack | Playable Blackjack card game |
 
-**👉 [repo](https://saigouthamkaranam.github.com/Python-Programming/Beginner-Level-Projects)**
+**👉 [repo](https://github.com/saigouthamkaranam/Python-Programming/tree/main/Beginner-Level-Projects)**
 
 ---
 
