@@ -31,9 +31,22 @@ Python-Programming/
 ├── Beginner-Level-Projects/   # First Python projects — logic, games, utilities
 ├── Practice_Problems/         # Coding challenges and problem solving
 ├── Python-Notes/              # Structured learning notes + visual cheatsheet
-├── Streamlit/                 # Data apps and dashboards built with Streamlit
-└── practice_projects/         # Experimental builds and mini-projects
+└── Streamlit/                 # Data apps and dashboards built with Streamlit
 ```
+
+---
+
+## 📓 Python Notes
+
+Structured learning notes written while studying Python — from variables to advanced OOP, generators, decorators, async and more.
+
+| File | Covers |
+|---|---|
+| [`Python Cheatsheet`](./Python-Notes/cheatsheet/cheatsheet.html) | Full visual cheatsheet — Beginner to Advanced |
+| [`Python Basics`](./Python-Notes/basic-python/readme.md) | Chapter 1 — Variables, Loops, Functions, Data Structures |
+| [`Advance Python`](./Python-Notes/advance-python/readme.md) | Chapter 2 — OOP, Inheritance, Decorators, MRO |
+
+**👉 [View the live styled cheatsheet](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet/cheatsheet.html)**
 
 ---
 
@@ -55,27 +68,15 @@ Hands-on projects built while learning Python fundamentals — covering function
 | 10 | The Auction Program | Simulates a blind auction |
 | 11 | The Blackjack | Playable Blackjack card game |
 
+**👉 [repo](https://saigouthamkaranam.github.com/Python-Programming/Beginner-Level-Projects)**
+
 ---
 
 ## 🟡 Practice Problems
 
 Coding challenges and problem-solving exercises — focused on sharpening logic, data structures and algorithmic thinking.
 
-> Located in `/Practice_Problems`
-
----
-
-## 📓 Python Notes
-
-Structured learning notes written while studying Python — from variables to advanced OOP, generators, decorators, async and more.
-
-| File | Covers |
-|---|---|
-| [`cheatsheet.html`](./Python-Notes/cheatsheet/cheatsheet.html) | Full visual cheatsheet — Beginner to Advanced |
-| [`Python Basics`](./Python-Notes/basic-python/readme.md) | Chapter 1 — Variables, Loops, Functions, Data Structures |
-| [`README.md`](./Python-Notes/advance-python/readme.md) | Chapter 2 — OOP, Inheritance, Decorators, MRO |
-
-**👉 [View the live styled cheatsheet](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet/cheatsheet.html)**
+> [Located in](https://saigouthamkaranam.github.com/Python-Programming/Practice_Problems)
 
 ---
 
@@ -83,7 +84,7 @@ Structured learning notes written while studying Python — from variables to ad
 
 Interactive data applications and dashboards built with Streamlit.
 
-> Located in `/Streamlit`
+> [Located in](https://saigouthamkaranam.github.com/Python-Programming/Streamlit)
 
 ---
 
