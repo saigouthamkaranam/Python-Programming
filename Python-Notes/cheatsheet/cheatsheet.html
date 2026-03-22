@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Cheatsheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+
+:root {
+  --bg:    #f8f7f3;
+  --bg2:   #ffffff;
+  --bg3:   #f0efe9;
+  --line:  rgba(0,0,0,0.09);
+  --line2: rgba(0,0,0,0.15);
+
+  /* ALL text is dark — nothing grey-on-white */
+  --text:  #111111;   /* primary body */
+  --sub:   #444444;   /* secondary labels */
+  --meta:  #777777;   /* tiny metadata — eyebrow, card-title */
+
+  --violet: #5b4fcf;
+  --teal:   #0e8f73;
+  --amber:  #a06a10;
+  --rose:   #a82850;
+  --blue:   #1a5fa8;
+  --green:  #1e7040;
+  --orange: #b04800;
+  --red:    #a02828;
+
+  --sans:  'DM Sans', sans-serif;
+  --mono:  'DM Mono', monospace;
+  --serif: 'Playfair Display', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 5rem 5rem 4rem;
+  border-bottom: 2px solid var(--line2);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--meta);
+  margin-bottom: 1.8rem;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--sub);
+}
+.hero-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--sub);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.badges { display: flex; gap: 7px; flex-wrap: wrap; }
+.badge {
+  padding: 4px 13px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1.5px solid;
+}
+.badge.bv { color:var(--violet); border-color:rgba(91,79,207,0.4);  background:rgba(91,79,207,0.08); }
+.badge.bt { color:var(--teal);   border-color:rgba(14,143,115,0.4); background:rgba(14,143,115,0.08); }
+.badge.ba { color:var(--amber);  border-color:rgba(160,106,16,0.4); background:rgba(160,106,16,0.08); }
+.badge.br { color:var(--rose);   border-color:rgba(168,40,80,0.4);  background:rgba(168,40,80,0.08); }
+.badge.bb { color:var(--blue);   border-color:rgba(26,95,168,0.4);  background:rgba(26,95,168,0.08); }
+.badge.bg { color:var(--green);  border-color:rgba(30,112,64,0.4);  background:rgba(30,112,64,0.08); }
+.badge.bo { color:var(--orange); border-color:rgba(176,72,0,0.4);   background:rgba(176,72,0,0.08); }
+
+/* ── NAV ── */
+.toc {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line2);
+  padding: 0 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.toc a {
+  color: var(--sub);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-right: 1px solid var(--line);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.12s;
+  white-space: nowrap;
+}
+.toc a:hover { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 4rem 5rem; }
+.section   { margin-bottom: 4.5rem; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 2px solid;
+}
+.section-title .dot { display: none; }
+.section-title h2 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+/* per-section colors — title + underline */
+.section[id="basics"]         .section-title { border-color: rgba(91,79,207,0.3); }
+.section[id="strings"]        .section-title { border-color: rgba(14,143,115,0.3); }
+.section[id="lists"]          .section-title { border-color: rgba(160,106,16,0.3); }
+.section[id="tuples"]         .section-title { border-color: rgba(168,40,80,0.3); }
+.section[id="dicts"]          .section-title { border-color: rgba(26,95,168,0.3); }
+.section[id="comprehensions"] .section-title { border-color: rgba(30,112,64,0.3); }
+.section[id="functions"]      .section-title { border-color: rgba(91,79,207,0.3); }
+.section[id="oop"]            .section-title { border-color: rgba(14,143,115,0.3); }
+.section[id="generators"]     .section-title { border-color: rgba(160,106,16,0.3); }
+.section[id="decorators"]     .section-title { border-color: rgba(168,40,80,0.3); }
+.section[id="errors"]         .section-title { border-color: rgba(160,40,40,0.3); }
+.section[id="files"]          .section-title { border-color: rgba(30,112,64,0.3); }
+.section[id="modules"]        .section-title { border-color: rgba(26,95,168,0.3); }
+.section[id="regex"]          .section-title { border-color: rgba(176,72,0,0.3); }
+.section[id="async"]          .section-title { border-color: rgba(91,79,207,0.3); }
+
+.section[id="basics"]         .section-title h2 { color: var(--violet); }
+.section[id="strings"]        .section-title h2 { color: var(--teal); }
+.section[id="lists"]          .section-title h2 { color: var(--amber); }
+.section[id="tuples"]         .section-title h2 { color: var(--rose); }
+.section[id="dicts"]          .section-title h2 { color: var(--blue); }
+.section[id="comprehensions"] .section-title h2 { color: var(--green); }
+.section[id="functions"]      .section-title h2 { color: var(--violet); }
+.section[id="oop"]            .section-title h2 { color: var(--teal); }
+.section[id="generators"]     .section-title h2 { color: var(--amber); }
+.section[id="decorators"]     .section-title h2 { color: var(--rose); }
+.section[id="errors"]         .section-title h2 { color: var(--red); }
+.section[id="files"]          .section-title h2 { color: var(--green); }
+.section[id="modules"]        .section-title h2 { color: var(--blue); }
+.section[id="regex"]          .section-title h2 { color: var(--orange); }
+.section[id="async"]          .section-title h2 { color: var(--violet); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 12px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg2);
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  padding: 1.3rem 1.5rem;
+  transition: box-shadow 0.15s;
+}
+.card:hover { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+
+.section[id="basics"]         .card { border-top: 3px solid var(--violet); background:rgba(91,79,207,0.025); }
+.section[id="strings"]        .card { border-top: 3px solid var(--teal);   background:rgba(14,143,115,0.025); }
+.section[id="lists"]          .card { border-top: 3px solid var(--amber);  background:rgba(160,106,16,0.025); }
+.section[id="tuples"]         .card { border-top: 3px solid var(--rose);   background:rgba(168,40,80,0.025); }
+.section[id="dicts"]          .card { border-top: 3px solid var(--blue);   background:rgba(26,95,168,0.025); }
+.section[id="comprehensions"] .card { border-top: 3px solid var(--green);  background:rgba(30,112,64,0.025); }
+.section[id="functions"]      .card { border-top: 3px solid var(--violet); background:rgba(91,79,207,0.025); }
+.section[id="oop"]            .card { border-top: 3px solid var(--teal);   background:rgba(14,143,115,0.025); }
+.section[id="generators"]     .card { border-top: 3px solid var(--amber);  background:rgba(160,106,16,0.025); }
+.section[id="decorators"]     .card { border-top: 3px solid var(--rose);   background:rgba(168,40,80,0.025); }
+.section[id="errors"]         .card { border-top: 3px solid var(--red);    background:rgba(160,40,40,0.025); }
+.section[id="files"]          .card { border-top: 3px solid var(--green);  background:rgba(30,112,64,0.025); }
+.section[id="modules"]        .card { border-top: 3px solid var(--blue);   background:rgba(26,95,168,0.025); }
+.section[id="regex"]          .card { border-top: 3px solid var(--orange); background:rgba(176,72,0,0.025); }
+.section[id="async"]          .card { border-top: 3px solid var(--violet); background:rgba(91,79,207,0.025); }
+
+.card-title {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--meta);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── CODE ── */
+pre {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf6;
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  line-height: 1.9;
+  margin: 5px 0;
+}
+code {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  background: var(--bg3);
+  border: 1px solid var(--line2);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--teal);
+}
+
+/* ── SYNTAX — all readable on white ── */
+.kw { color: #5b4fcf; font-weight: 500; }  /* violet  — keywords  */
+.fn { color: #1a5fa8; }                     /* blue    — functions */
+.st { color: #a06a10; }                     /* amber   — strings   */
+.cm { color: #aaaaaa; }                     /* grey    — comments (intentionally lighter, still readable) */
+.nm { color: #0e8f73; }                     /* teal    — numbers   */
+.cl { color: #a82850; font-weight: 500; }   /* rose    — classes   */
+.op { color: #999999; }                     /* grey    — operators */
+.dn { color: #222222; }                     /* near-black — default code */
+
+/* ── TABLES ── */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  text-align: left;
+  padding: 7px 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--meta);
+  border-bottom: 1px solid var(--line2);
+  background: var(--bg3);
+}
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--text);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(0,0,0,0.018); }
+td:first-child { font-family: var(--mono); color: var(--teal); font-size: 11.5px; }
+td.plain { font-family: var(--sans); color: var(--sub); }
+
+/* ── CALLOUTS ── */
+.tip {
+  border-left: 2px solid var(--violet);
+  background: rgba(91,79,207,0.05);
+  border-radius: 0 4px 4px 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 12px;
+  color: var(--violet);
+  margin: 8px 0;
+  font-style: italic;
+}
+.warn {
+  border-left: 2px solid var(--amber);
+  background: rgba(160,106,16,0.05);
+  border-radius: 0 4px 4px 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 12px;
+  color: var(--amber);
+  margin: 8px 0;
+}
+
+hr { border: none; border-top: 1px solid var(--line); margin: 3rem 0; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 20px;
+  margin-right: 4px;
+  border: 1.5px solid;
+}
+.tag-b { color: var(--violet); border-color: rgba(91,79,207,0.4);  background: rgba(91,79,207,0.08); }
+.tag-i { color: var(--teal);   border-color: rgba(14,143,115,0.4); background: rgba(14,143,115,0.08); }
+.tag-a { color: var(--amber);  border-color: rgba(160,106,16,0.4); background: rgba(160,106,16,0.08); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 3rem;
+  color: var(--meta);
+  font-size: 10px;
+  border-top: 1px solid var(--line2);
+  background: var(--bg2);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">GOUTHAM'S PYTHON CHEATSHEET</div>
+  <h1>Python,<br><em>start to finish.</em></h1>
+  <p class="hero-sub">Variables &nbsp;&middot;&nbsp; OOP &nbsp;&middot;&nbsp; Async &nbsp;&middot;&nbsp; Everything in one place</p>
+  <div class="badges">
+    <span class="badge bv">Variables</span>
+    <span class="badge bt">Strings</span>
+    <span class="badge ba">Lists</span>
+    <span class="badge br">Tuples &amp; Sets</span>
+    <span class="badge bb">Dicts</span>
+    <span class="badge bg">Comprehensions</span>
+    <span class="badge bv">Functions</span>
+    <span class="badge bt">OOP</span>
+    <span class="badge ba">Generators</span>
+    <span class="badge br">Decorators</span>
+    <span class="badge bo">Error Handling</span>
+    <span class="badge bg">File I/O</span>
+    <span class="badge bb">Modules</span>
+    <span class="badge bo">Regex</span>
+    <span class="badge bv">Async / Await</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <a href="#basics">Basics</a>
+  <a href="#strings">Strings</a>
+  <a href="#lists">Lists</a>
+  <a href="#tuples">Tuples</a>
+  <a href="#sets">Sets</a>
+  <a href="#dicts">Dicts</a>
+  <a href="#comprehensions">Comprehensions</a>
+  <a href="#functions">Functions</a>
+  <a href="#oop">OOP</a>
+  <a href="#generators">Generators</a>
+  <a href="#decorators">Decorators</a>
+  <a href="#errors">Error Handling</a>
+  <a href="#files">File I/O</a>
+  <a href="#modules">Modules</a>
+  <a href="#regex">Regex</a>
+  <a href="#async">Async/Await</a>
+</nav>
+
+<div class="container">
+
+  <!-- ───────────── BASICS ───────────── -->
+  <div class="section" id="basics">
+    <div class="section-title"><h2>Variables &amp; Data Types </h2><span class="tag tag-b">Beginner</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Variable assignment</div>
+        <pre><span class="cm"># Python infers the type automatically</span>
+<span class="dn">name</span>   <span class="op">=</span> <span class="st">"G"</span>             <span class="cm"># str</span>
+<span class="dn">age</span>    <span class="op">=</span> <span class="nm">25</span>              <span class="cm"># int</span>
+<span class="dn">height</span> <span class="op">=</span> <span class="nm">5.11</span>            <span class="cm"># float</span>
+<span class="dn">active</span> <span class="op">=</span> <span class="kw">True</span>            <span class="cm"># bool</span>
+<span class="dn">result</span> <span class="op">=</span> <span class="kw">None</span>            <span class="cm"># NoneType</span>
+
+<span class="cm"># Multi-assign</span>
+<span class="dn">x</span><span class="op">, </span><span class="dn">y</span><span class="op">, </span><span class="dn">z</span> <span class="op">=</span> <span class="nm">1</span><span class="op">, </span><span class="nm">2</span><span class="op">, </span><span class="nm">3</span>
+<span class="dn">a</span> <span class="op">=</span> <span class="dn">b</span> <span class="op">=</span> <span class="nm">0</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Type conversion</div>
+        <pre><span class="fn">int</span><span class="dn">(</span><span class="st">"42"</span><span class="dn">)</span>        <span class="cm"># → 42</span>
+<span class="fn">float</span><span class="dn">(</span><span class="nm">10</span><span class="dn">)</span>       <span class="cm"># → 10.0</span>
+<span class="fn">str</span><span class="dn">(</span><span class="nm">3.14</span><span class="dn">)</span>       <span class="cm"># → "3.14"</span>
+<span class="fn">bool</span><span class="dn">(</span><span class="nm">0</span><span class="dn">)</span>         <span class="cm"># → False</span>
+<span class="fn">bool</span><span class="dn">(</span><span class="st">"hello"</span><span class="dn">)</span>   <span class="cm"># → True</span>
+<span class="fn">list</span><span class="dn">(</span><span class="st">"abc"</span><span class="dn">)</span>    <span class="cm"># → ['a','b','c']</span>
+<span class="fn">type</span><span class="dn">(</span><span class="nm">42</span><span class="dn">)</span>        <span class="cm"># → &lt;class 'int'&gt;</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">f-strings &amp; formatting</div>
+        <pre><span class="dn">name</span><span class="op">, </span><span class="dn">age</span> <span class="op">=</span> <span class="st">"G"</span><span class="op">, </span><span class="nm">25</span>
+<span class="fn">print</span><span class="dn">(</span><span class="st">f"Hello </span><span class="kw">{</span><span class="dn">name</span><span class="kw">}</span><span class="st">, age </span><span class="kw">{</span><span class="dn">age</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>
+<span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="nm">3.14159</span><span class="op">:.2f</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>    <span class="cm"># 3.14</span>
+<span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="nm">1000000</span><span class="op">:,</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>     <span class="cm"># 1,000,000</span>
+<span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="dn">age</span><span class="op">:&gt;5</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>         <span class="cm"># "   25" right-align</span>
+<span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="st">'hi'</span><span class="op">:&lt;10</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>      <span class="cm"># "hi        " left-align</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Operators</div>
+        <table>
+          <tr><th>Op</th><th>Meaning</th><th>Example</th></tr>
+          <tr><td>+  -  *  /</td><td class="plain">Arithmetic</td><td class="plain">5 + 3 → 8</td></tr>
+          <tr><td>//</td><td class="plain">Floor division</td><td class="plain">7 // 2 → 3</td></tr>
+          <tr><td>%</td><td class="plain">Modulo</td><td class="plain">7 % 2 → 1</td></tr>
+          <tr><td>**</td><td class="plain">Exponent</td><td class="plain">2 ** 8 → 256</td></tr>
+          <tr><td>== != &gt; &lt; &gt;= &lt;=</td><td class="plain">Comparison</td><td class="plain">→ bool</td></tr>
+          <tr><td>and or not</td><td class="plain">Logical</td><td class="plain">True and False</td></tr>
+          <tr><td>in / not in</td><td class="plain">Membership</td><td class="plain">"a" in "abc"</td></tr>
+          <tr><td>is / is not</td><td class="plain">Identity</td><td class="plain">x is None</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── STRINGS ───────────── -->
+  <div class="section" id="strings">
+    <div class="section-title"><h2>Strings </h2><span class="tag tag-b">Beginner</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Common methods</div>
+        <table>
+          <tr><th>Method</th><th>Result</th></tr>
+          <tr><td>.upper()</td><td class="plain">"hello" → "HELLO"</td></tr>
+          <tr><td>.lower()</td><td class="plain">"HELLO" → "hello"</td></tr>
+          <tr><td>.strip()</td><td class="plain">"  hi  " → "hi"</td></tr>
+          <tr><td>.split(",")</td><td class="plain">"a,b" → ["a","b"]</td></tr>
+          <tr><td>",".join(lst)</td><td class="plain">["a","b"] → "a,b"</td></tr>
+          <tr><td>.replace(a,b)</td><td class="plain">"foo" → "bar"</td></tr>
+          <tr><td>.find(sub)</td><td class="plain">index or -1</td></tr>
+          <tr><td>.startswith(s)</td><td class="plain">→ bool</td></tr>
+          <tr><td>.count(sub)</td><td class="plain">occurrences</td></tr>
+          <tr><td>.zfill(5)</td><td class="plain">"42" → "00042"</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">Slicing &amp; indexing</div>
+        <pre><span class="dn">s</span> <span class="op">=</span> <span class="st">"Hello, World!"</span>
+<span class="dn">s</span><span class="dn">[</span><span class="nm">0</span><span class="dn">]</span>        <span class="cm"># 'H'</span>
+<span class="dn">s</span><span class="dn">[</span><span class="op">-</span><span class="nm">1</span><span class="dn">]</span>       <span class="cm"># '!'</span>
+<span class="dn">s</span><span class="dn">[</span><span class="nm">0</span><span class="op">:</span><span class="nm">5</span><span class="dn">]</span>      <span class="cm"># 'Hello'</span>
+<span class="dn">s</span><span class="dn">[</span><span class="op">::-</span><span class="nm">1</span><span class="dn">]</span>     <span class="cm"># reverse string</span>
+<span class="dn">s</span><span class="dn">[</span><span class="nm">7</span><span class="op">:</span><span class="dn">]</span>       <span class="cm"># 'World!'</span>
+<span class="fn">len</span><span class="dn">(</span><span class="dn">s</span><span class="dn">)</span>       <span class="cm"># 13</span>
+
+<span class="cm"># Strings are immutable!</span>
+<span class="cm"># s[0] = 'h'  ← TypeError</span></pre>
+        <div class="tip">Strings are immutable — you can't change them in place. Every method returns a <em>new</em> string.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── LISTS ───────────── -->
+  <div class="section" id="lists">
+    <div class="section-title"><h2>Lists </h2><span class="tag tag-b">Beginner</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Creating &amp; accessing</div>
+        <pre><span class="dn">fruits</span> <span class="op">=</span> <span class="dn">[</span><span class="st">"apple"</span><span class="op">, </span><span class="st">"banana"</span><span class="op">, </span><span class="st">"cherry"</span><span class="dn">]</span>
+<span class="dn">fruits</span><span class="dn">[</span><span class="nm">0</span><span class="dn">]</span>      <span class="cm"># "apple"</span>
+<span class="dn">fruits</span><span class="dn">[</span><span class="op">-</span><span class="nm">1</span><span class="dn">]</span>     <span class="cm"># "cherry"</span>
+<span class="dn">fruits</span><span class="dn">[</span><span class="nm">0</span><span class="op">:</span><span class="nm">2</span><span class="dn">]</span>    <span class="cm"># ["apple","banana"]</span>
+<span class="dn">fruits</span><span class="dn">[</span><span class="op">::-</span><span class="nm">1</span><span class="dn">]</span>  <span class="cm"># reversed</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Common methods</div>
+        <table>
+          <tr><th>Method</th><th>What it does</th></tr>
+          <tr><td>.append(x)</td><td class="plain">Add to end</td></tr>
+          <tr><td>.insert(i,x)</td><td class="plain">Insert at index</td></tr>
+          <tr><td>.remove(x)</td><td class="plain">Remove first occurrence</td></tr>
+          <tr><td>.pop(i)</td><td class="plain">Remove &amp; return at index</td></tr>
+          <tr><td>.sort()</td><td class="plain">Sort in place</td></tr>
+          <tr><td>.reverse()</td><td class="plain">Reverse in place</td></tr>
+          <tr><td>.index(x)</td><td class="plain">Find index of x</td></tr>
+          <tr><td>.count(x)</td><td class="plain">Count occurrences</td></tr>
+          <tr><td>.extend(lst)</td><td class="plain">Append another list</td></tr>
+          <tr><td>.copy()</td><td class="plain">Shallow copy</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── TUPLES & SETS ───────────── -->
+  <div class="section" id="tuples">
+    <div class="section-title"><h2>Tuples &amp; Sets </h2><span class="tag tag-b">Beginner</span></div>
+    <div class="grid-2">
+      <div class="card" id="tuples">
+        <div class="card-title">Tuples — ordered, immutable</div>
+        <pre><span class="dn">coords</span> <span class="op">=</span> <span class="dn">(</span><span class="nm">17.38</span><span class="op">, </span><span class="nm">78.48</span><span class="dn">)</span>
+<span class="dn">single</span> <span class="op">=</span> <span class="dn">(</span><span class="nm">42</span><span class="op">,</span><span class="dn">)</span>        <span class="cm"># ← comma needed!</span>
+<span class="dn">lat</span><span class="op">, </span><span class="dn">lng</span> <span class="op">=</span> <span class="dn">coords</span>      <span class="cm"># unpacking</span>
+<span class="dn">coords</span><span class="dn">[</span><span class="nm">0</span><span class="dn">]</span>              <span class="cm"># 17.38</span>
+<span class="cm"># coords[0] = 0  ← TypeError (immutable)</span></pre>
+        <div class="tip">Use tuples for data that must never change — coordinates, RGB values, database rows.</div>
+      </div>
+      <div class="card" id="sets">
+        <div class="card-title">Sets — unique, unordered</div>
+        <pre><span class="dn">A</span> <span class="op">=</span> <span class="dn">{</span><span class="nm">1</span><span class="op">, </span><span class="nm">2</span><span class="op">, </span><span class="nm">3</span><span class="op">, </span><span class="nm">4</span><span class="dn">}</span>
+<span class="dn">B</span> <span class="op">=</span> <span class="dn">{</span><span class="nm">3</span><span class="op">, </span><span class="nm">4</span><span class="op">, </span><span class="nm">5</span><span class="op">, </span><span class="nm">6</span><span class="dn">}</span>
+
+<span class="dn">A</span> <span class="op">|</span> <span class="dn">B</span>    <span class="cm"># union         → {1,2,3,4,5,6}</span>
+<span class="dn">A</span> <span class="op">&amp;</span> <span class="dn">B</span>    <span class="cm"># intersection  → {3,4}</span>
+<span class="dn">A</span> <span class="op">-</span> <span class="dn">B</span>    <span class="cm"># difference    → {1,2}</span>
+<span class="dn">A</span> <span class="op">^</span> <span class="dn">B</span>    <span class="cm"># sym. diff     → {1,2,5,6}</span>
+
+<span class="cm"># Remove duplicates from list:</span>
+<span class="fn">list</span><span class="dn">(</span><span class="fn">set</span><span class="dn">(</span><span class="dn">my_list</span><span class="dn">))</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── DICTS ───────────── -->
+  <div class="section" id="dicts">
+    <div class="section-title"><h2>Dictionaries </h2><span class="tag tag-b">Beginner</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Create, access, update</div>
+        <pre><span class="dn">person</span> <span class="op">=</span> <span class="dn">{</span><span class="st">"name"</span><span class="op">: </span><span class="st">"G"</span><span class="op">, </span><span class="st">"age"</span><span class="op">: </span><span class="nm">25</span><span class="dn">}</span>
+
+<span class="dn">person</span><span class="dn">[</span><span class="st">"name"</span><span class="dn">]</span>            <span class="cm"># "G"</span>
+<span class="dn">person</span><span class="op">.</span><span class="fn">get</span><span class="dn">(</span><span class="st">"city"</span><span class="op">, </span><span class="st">"N/A"</span><span class="dn">)</span>  <span class="cm"># safe access</span>
+<span class="dn">person</span><span class="dn">[</span><span class="st">"city"</span><span class="dn">]</span> <span class="op">=</span> <span class="st">"NYC"</span>     <span class="cm"># add/update</span>
+<span class="kw">del</span> <span class="dn">person</span><span class="dn">[</span><span class="st">"age"</span><span class="dn">]</span>          <span class="cm"># delete</span>
+
+<span class="kw">for</span> <span class="dn">k</span><span class="op">, </span><span class="dn">v</span> <span class="kw">in</span> <span class="dn">person</span><span class="op">.</span><span class="fn">items</span><span class="dn">()</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="dn">k</span><span class="kw">}</span><span class="st">: </span><span class="kw">{</span><span class="dn">v</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Methods</div>
+        <table>
+          <tr><th>Method</th><th>Returns</th></tr>
+          <tr><td>.keys()</td><td class="plain">All keys</td></tr>
+          <tr><td>.values()</td><td class="plain">All values</td></tr>
+          <tr><td>.items()</td><td class="plain">All (k,v) pairs</td></tr>
+          <tr><td>.get(k, default)</td><td class="plain">Value or default</td></tr>
+          <tr><td>.pop(k)</td><td class="plain">Remove &amp; return value</td></tr>
+          <tr><td>.update(d)</td><td class="plain">Merge dict in</td></tr>
+          <tr><td>.setdefault(k,v)</td><td class="plain">Set if key missing</td></tr>
+          <tr><td>.copy()</td><td class="plain">Shallow copy</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── COMPREHENSIONS ───────────── -->
+  <div class="section" id="comprehensions">
+    <div class="section-title"><h2>Comprehensions </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">List comprehension</div>
+        <pre><span class="cm"># [expression for item in iterable if condition]</span>
+<span class="dn">squares</span> <span class="op">=</span> <span class="dn">[</span><span class="dn">x</span><span class="op">**</span><span class="nm">2</span> <span class="kw">for</span> <span class="dn">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="dn">(</span><span class="nm">10</span><span class="dn">)]</span>
+<span class="dn">evens</span>   <span class="op">=</span> <span class="dn">[</span><span class="dn">x</span> <span class="kw">for</span> <span class="dn">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="dn">(</span><span class="nm">20</span><span class="dn">)</span> <span class="kw">if</span> <span class="dn">x</span> <span class="op">%</span> <span class="nm">2</span> <span class="op">==</span> <span class="nm">0</span><span class="dn">]</span>
+<span class="dn">flat</span>    <span class="op">=</span> <span class="dn">[</span><span class="dn">n</span> <span class="kw">for</span> <span class="dn">row</span> <span class="kw">in</span> <span class="dn">matrix</span> <span class="kw">for</span> <span class="dn">n</span> <span class="kw">in</span> <span class="dn">row</span><span class="dn">]</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Dict &amp; set comprehension</div>
+        <pre><span class="cm"># dict comprehension</span>
+<span class="dn">sq_map</span> <span class="op">=</span> <span class="dn">{</span><span class="dn">x</span><span class="op">: </span><span class="dn">x</span><span class="op">**</span><span class="nm">2</span> <span class="kw">for</span> <span class="dn">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="dn">(</span><span class="nm">5</span><span class="dn">)}</span>
+<span class="cm"># {0:0, 1:1, 2:4, 3:9, 4:16}</span>
+
+<span class="cm"># set comprehension</span>
+<span class="dn">unique_sq</span> <span class="op">=</span> <span class="dn">{</span><span class="dn">x</span><span class="op">**</span><span class="nm">2</span> <span class="kw">for</span> <span class="dn">x</span> <span class="kw">in</span> <span class="dn">[</span><span class="op">-</span><span class="nm">2</span><span class="op">,</span><span class="op">-</span><span class="nm">1</span><span class="op">,</span><span class="nm">0</span><span class="op">,</span><span class="nm">1</span><span class="op">,</span><span class="nm">2</span><span class="dn">]}</span>
+<span class="cm"># {0, 1, 4}</span>
+
+<span class="cm"># generator expression (lazy)</span>
+<span class="dn">total</span> <span class="op">=</span> <span class="fn">sum</span><span class="dn">(</span><span class="dn">x</span><span class="op">**</span><span class="nm">2</span> <span class="kw">for</span> <span class="dn">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="dn">(</span><span class="nm">1000000</span><span class="dn">))</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── FUNCTIONS ───────────── -->
+  <div class="section" id="functions">
+    <div class="section-title"><h2>Functions </h2><span class="tag tag-b">Beginner</span> <span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Basics + defaults</div>
+        <pre><span class="kw">def</span> <span class="fn">greet</span><span class="dn">(</span><span class="dn">name</span><span class="op">, </span><span class="dn">greeting</span><span class="op">=</span><span class="st">"Hello"</span><span class="dn">):</span>
+    <span class="kw">return</span> <span class="st">f"</span><span class="kw">{</span><span class="dn">greeting</span><span class="kw">}</span><span class="st">, </span><span class="kw">{</span><span class="dn">name</span><span class="kw">}</span><span class="st">!"</span>
+
+<span class="fn">greet</span><span class="dn">(</span><span class="st">"G"</span><span class="dn">)</span>               <span class="cm"># "Hello, G!"</span>
+<span class="fn">greet</span><span class="dn">(</span><span class="st">"G"</span><span class="op">, </span><span class="st">"Hey"</span><span class="dn">)</span>        <span class="cm"># "Hey, G!"</span>
+<span class="fn">greet</span><span class="dn">(</span><span class="dn">greeting</span><span class="op">=</span><span class="st">"Yo"</span><span class="op">, </span><span class="dn">name</span><span class="op">=</span><span class="st">"G"</span><span class="dn">)</span>  <span class="cm"># keyword args</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">*args and **kwargs</div>
+        <pre><span class="kw">def</span> <span class="fn">total</span><span class="dn">(</span><span class="op">*</span><span class="dn">args</span><span class="dn">):</span>              <span class="cm"># tuple</span>
+    <span class="kw">return</span> <span class="fn">sum</span><span class="dn">(</span><span class="dn">args</span><span class="dn">)</span>
+
+<span class="kw">def</span> <span class="fn">profile</span><span class="dn">(</span><span class="op">**</span><span class="dn">kwargs</span><span class="dn">):</span>          <span class="cm"># dict</span>
+    <span class="kw">for</span> <span class="dn">k</span><span class="op">, </span><span class="dn">v</span> <span class="kw">in</span> <span class="dn">kwargs</span><span class="op">.</span><span class="fn">items</span><span class="dn">():</span>
+        <span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="dn">k</span><span class="kw">}</span><span class="st">: </span><span class="kw">{</span><span class="dn">v</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>
+
+<span class="fn">total</span><span class="dn">(</span><span class="nm">1</span><span class="op">, </span><span class="nm">2</span><span class="op">, </span><span class="nm">3</span><span class="dn">)</span>                  <span class="cm"># 6</span>
+<span class="fn">profile</span><span class="dn">(</span><span class="dn">name</span><span class="op">=</span><span class="st">"G"</span><span class="op">, </span><span class="dn">age</span><span class="op">=</span><span class="nm">25</span><span class="dn">)</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Lambda &amp; built-ins</div>
+        <pre><span class="dn">square</span>  <span class="op">=</span> <span class="kw">lambda</span> <span class="dn">x</span><span class="op">:</span> <span class="dn">x</span> <span class="op">**</span> <span class="nm">2</span>
+<span class="dn">add</span>     <span class="op">=</span> <span class="kw">lambda</span> <span class="dn">x</span><span class="op">, </span><span class="dn">y</span><span class="op">:</span> <span class="dn">x</span> <span class="op">+</span> <span class="dn">y</span>
+
+<span class="dn">nums</span> <span class="op">=</span> <span class="dn">[</span><span class="nm">3</span><span class="op">,</span><span class="nm">1</span><span class="op">,</span><span class="nm">4</span><span class="op">,</span><span class="nm">1</span><span class="op">,</span><span class="nm">5</span><span class="op">,</span><span class="nm">9</span><span class="dn">]</span>
+<span class="fn">sorted</span><span class="dn">(</span><span class="dn">nums</span><span class="dn">)</span>
+<span class="fn">sorted</span><span class="dn">(</span><span class="dn">words</span><span class="op">, </span><span class="dn">key</span><span class="op">=</span><span class="kw">lambda</span> <span class="dn">w</span><span class="op">:</span> <span class="fn">len</span><span class="dn">(</span><span class="dn">w</span><span class="dn">))</span>
+
+<span class="fn">list</span><span class="dn">(</span><span class="fn">map</span><span class="dn">(</span><span class="dn">square</span><span class="op">, </span><span class="dn">nums</span><span class="dn">))</span>    <span class="cm"># apply fn</span>
+<span class="fn">list</span><span class="dn">(</span><span class="fn">filter</span><span class="dn">(</span><span class="kw">lambda</span> <span class="dn">x</span><span class="op">:</span> <span class="dn">x</span><span class="op">&gt;</span><span class="nm">3</span><span class="op">, </span><span class="dn">nums</span><span class="dn">))</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Scope — LEGB rule</div>
+        <pre><span class="dn">x</span> <span class="op">=</span> <span class="st">"global"</span>
+
+<span class="kw">def</span> <span class="fn">outer</span><span class="dn">():</span>
+    <span class="dn">x</span> <span class="op">=</span> <span class="st">"enclosing"</span>
+    <span class="kw">def</span> <span class="fn">inner</span><span class="dn">():</span>
+        <span class="cm"># x is found in enclosing scope</span>
+        <span class="fn">print</span><span class="dn">(</span><span class="dn">x</span><span class="dn">)</span>   <span class="cm"># "enclosing"</span>
+    <span class="fn">inner</span><span class="dn">()</span>
+
+<span class="cm"># L → Local → E → Enclosing</span>
+<span class="cm"># G → Global → B → Built-in</span>
+
+<span class="kw">def</span> <span class="fn">modify</span><span class="dn">():</span>
+    <span class="kw">global</span> <span class="dn">x</span>     <span class="cm"># modify global</span>
+    <span class="dn">x</span> <span class="op">=</span> <span class="st">"changed"</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── OOP ───────────── -->
+  <div class="section" id="oop">
+    <div class="section-title"><h2>OOP </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Class basics</div>
+        <pre><span class="kw">class</span> <span class="cl">Car</span><span class="dn">:</span>
+    <span class="dn">total</span> <span class="op">=</span> <span class="nm">0</span>                    <span class="cm"># class var</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span><span class="dn">(</span><span class="dn">self</span><span class="op">, </span><span class="dn">brand</span><span class="dn">):</span>
+        <span class="dn">self</span><span class="op">.</span><span class="dn">brand</span> <span class="op">=</span> <span class="dn">brand</span>        <span class="cm"># instance var</span>
+        <span class="cl">Car</span><span class="op">.</span><span class="dn">total</span> <span class="op">+=</span> <span class="nm">1</span>
+
+    <span class="kw">def</span> <span class="fn">show</span><span class="dn">(</span><span class="dn">self</span><span class="dn">):</span>                <span class="cm"># instance method</span>
+        <span class="fn">print</span><span class="dn">(</span><span class="dn">self</span><span class="op">.</span><span class="dn">brand</span><span class="dn">)</span>
+
+    <span class="op">@</span><span class="fn">classmethod</span>
+    <span class="kw">def</span> <span class="fn">count</span><span class="dn">(</span><span class="dn">cls</span><span class="dn">):</span>               <span class="cm"># class method</span>
+        <span class="kw">return</span> <span class="dn">cls</span><span class="op">.</span><span class="dn">total</span>
+
+    <span class="op">@</span><span class="fn">staticmethod</span>
+    <span class="kw">def</span> <span class="fn">validate</span><span class="dn">(</span><span class="dn">brand</span><span class="dn">):</span>          <span class="cm"># static method</span>
+        <span class="kw">return</span> <span class="fn">len</span><span class="dn">(</span><span class="dn">brand</span><span class="dn">)</span> <span class="op">&gt;</span> <span class="nm">0</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Inheritance &amp; super()</div>
+        <pre><span class="kw">class</span> <span class="cl">Animal</span><span class="dn">:</span>
+    <span class="kw">def</span> <span class="fn">__init__</span><span class="dn">(</span><span class="dn">self</span><span class="op">, </span><span class="dn">name</span><span class="dn">):</span>
+        <span class="dn">self</span><span class="op">.</span><span class="dn">name</span> <span class="op">=</span> <span class="dn">name</span>
+    <span class="kw">def</span> <span class="fn">speak</span><span class="dn">(</span><span class="dn">self</span><span class="dn">):</span>
+        <span class="kw">return</span> <span class="st">"..."</span>
+
+<span class="kw">class</span> <span class="cl">Dog</span><span class="dn">(</span><span class="cl">Animal</span><span class="dn">):</span>
+    <span class="kw">def</span> <span class="fn">__init__</span><span class="dn">(</span><span class="dn">self</span><span class="op">, </span><span class="dn">name</span><span class="op">, </span><span class="dn">breed</span><span class="dn">):</span>
+        <span class="fn">super</span><span class="dn">()</span><span class="op">.</span><span class="fn">__init__</span><span class="dn">(</span><span class="dn">name</span><span class="dn">)</span>     <span class="cm"># call parent</span>
+        <span class="dn">self</span><span class="op">.</span><span class="dn">breed</span> <span class="op">=</span> <span class="dn">breed</span>
+    <span class="kw">def</span> <span class="fn">speak</span><span class="dn">(</span><span class="dn">self</span><span class="dn">):</span>               <span class="cm"># override</span>
+        <span class="kw">return</span> <span class="st">"Woof!"</span>
+
+<span class="fn">print</span><span class="dn">(</span><span class="cl">Dog</span><span class="op">.</span><span class="fn">mro</span><span class="dn">())</span>                  <span class="cm"># MRO</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Property decorators</div>
+        <pre><span class="kw">class</span> <span class="cl">BankAccount</span><span class="dn">:</span>
+    <span class="kw">def</span> <span class="fn">__init__</span><span class="dn">(</span><span class="dn">self</span><span class="op">, </span><span class="dn">balance</span><span class="dn">):</span>
+        <span class="dn">self</span><span class="op">.</span><span class="dn">__balance</span> <span class="op">=</span> <span class="dn">balance</span>   <span class="cm"># private</span>
+
+    <span class="op">@</span><span class="fn">property</span>
+    <span class="kw">def</span> <span class="fn">balance</span><span class="dn">(</span><span class="dn">self</span><span class="dn">):</span>             <span class="cm"># getter</span>
+        <span class="kw">return</span> <span class="dn">self</span><span class="op">.</span><span class="dn">__balance</span>
+
+    <span class="op">@</span><span class="dn">balance</span><span class="op">.</span><span class="fn">setter</span>
+    <span class="kw">def</span> <span class="fn">balance</span><span class="dn">(</span><span class="dn">self</span><span class="op">, </span><span class="dn">v</span><span class="dn">):</span>           <span class="cm"># setter</span>
+        <span class="kw">if</span> <span class="dn">v</span> <span class="op">&lt;</span> <span class="nm">0</span><span class="op">:</span> <span class="kw">raise</span> <span class="cl">ValueError</span>
+        <span class="dn">self</span><span class="op">.</span><span class="dn">__balance</span> <span class="op">=</span> <span class="dn">v</span>
+
+<span class="dn">acc</span> <span class="op">=</span> <span class="cl">BankAccount</span><span class="dn">(</span><span class="nm">1000</span><span class="dn">)</span>
+<span class="dn">acc</span><span class="op">.</span><span class="dn">balance</span> <span class="op">=</span> <span class="nm">2000</span>              <span class="cm"># setter called</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Dunder methods</div>
+        <table>
+          <tr><th>Method</th><th>Triggered by</th></tr>
+          <tr><td>__init__</td><td class="plain">MyClass()</td></tr>
+          <tr><td>__str__</td><td class="plain">print(obj), str(obj)</td></tr>
+          <tr><td>__repr__</td><td class="plain">repr(obj), REPL</td></tr>
+          <tr><td>__len__</td><td class="plain">len(obj)</td></tr>
+          <tr><td>__eq__</td><td class="plain">obj == other</td></tr>
+          <tr><td>__lt__</td><td class="plain">obj &lt; other</td></tr>
+          <tr><td>__add__</td><td class="plain">obj + other</td></tr>
+          <tr><td>__contains__</td><td class="plain">x in obj</td></tr>
+          <tr><td>__iter__</td><td class="plain">for x in obj</td></tr>
+          <tr><td>__getitem__</td><td class="plain">obj[key]</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── GENERATORS ───────────── -->
+  <div class="section" id="generators">
+    <div class="section-title"><h2>Generators </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Generator functions</div>
+        <pre><span class="kw">def</span> <span class="fn">count_up</span><span class="dn">(</span><span class="dn">max</span><span class="dn">):</span>
+    <span class="dn">n</span> <span class="op">=</span> <span class="nm">1</span>
+    <span class="kw">while</span> <span class="dn">n</span> <span class="op">&lt;=</span> <span class="dn">max</span><span class="op">:</span>
+        <span class="kw">yield</span> <span class="dn">n</span>          <span class="cm"># pause here</span>
+        <span class="dn">n</span> <span class="op">+=</span> <span class="nm">1</span>
+
+<span class="kw">for</span> <span class="dn">n</span> <span class="kw">in</span> <span class="fn">count_up</span><span class="dn">(</span><span class="nm">5</span><span class="dn">):</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="dn">n</span><span class="dn">)</span>
+
+<span class="cm"># Or use next() manually</span>
+<span class="dn">gen</span> <span class="op">=</span> <span class="fn">count_up</span><span class="dn">(</span><span class="nm">3</span><span class="dn">)</span>
+<span class="fn">next</span><span class="dn">(</span><span class="dn">gen</span><span class="dn">)</span>   <span class="cm"># 1</span>
+<span class="fn">next</span><span class="dn">(</span><span class="dn">gen</span><span class="dn">)</span>   <span class="cm"># 2</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Why generators?</div>
+        <table>
+          <tr><th>Property</th><th>Detail</th></tr>
+          <tr><td class="plain">Memory efficient</td><td class="plain">Values produced one at a time</td></tr>
+          <tr><td class="plain">Lazy evaluation</td><td class="plain">Compute only when needed</td></tr>
+          <tr><td class="plain">Infinite sequences</td><td class="plain">Fibonacci, primes, streams</td></tr>
+          <tr><td class="plain">Pipeline chaining</td><td class="plain">Gen → filter → map</td></tr>
+        </table>
+        <pre style="margin-top:8px;"><span class="cm"># Generator expression (inline)</span>
+<span class="dn">total</span> <span class="op">=</span> <span class="fn">sum</span><span class="dn">(</span><span class="dn">x</span><span class="op">**</span><span class="nm">2</span> <span class="kw">for</span> <span class="dn">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="dn">(</span><span class="nm">10</span><span class="op">**</span><span class="nm">6</span><span class="dn">))</span>
+<span class="cm"># Never builds a full list in memory!</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── DECORATORS ───────────── -->
+  <div class="section" id="decorators">
+    <div class="section-title"><h2>Decorators </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Basic decorator</div>
+        <pre><span class="kw">from</span> <span class="dn">functools</span> <span class="kw">import</span> <span class="dn">wraps</span>
+
+<span class="kw">def</span> <span class="fn">timer</span><span class="dn">(</span><span class="dn">func</span><span class="dn">):</span>
+    <span class="op">@</span><span class="fn">wraps</span><span class="dn">(</span><span class="dn">func</span><span class="dn">)</span>            <span class="cm"># preserve metadata</span>
+    <span class="kw">def</span> <span class="fn">wrapper</span><span class="dn">(</span><span class="op">*</span><span class="dn">args</span><span class="op">, **</span><span class="dn">kwargs</span><span class="dn">):</span>
+        <span class="kw">import</span> <span class="dn">time</span>
+        <span class="dn">start</span> <span class="op">=</span> <span class="dn">time</span><span class="op">.</span><span class="fn">time</span><span class="dn">()</span>
+        <span class="dn">result</span> <span class="op">=</span> <span class="fn">func</span><span class="dn">(</span><span class="op">*</span><span class="dn">args</span><span class="op">, **</span><span class="dn">kwargs</span><span class="dn">)</span>
+        <span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="dn">time</span><span class="op">.</span><span class="fn">time</span><span class="dn">()</span><span class="op">-</span><span class="dn">start</span><span class="op">:.4f</span><span class="kw">}</span><span class="st">s"</span><span class="dn">)</span>
+        <span class="kw">return</span> <span class="dn">result</span>
+    <span class="kw">return</span> <span class="dn">wrapper</span>
+
+<span class="op">@</span><span class="fn">timer</span>
+<span class="kw">def</span> <span class="fn">slow_fn</span><span class="dn">():</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"running..."</span><span class="dn">)</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Decorator with arguments</div>
+        <pre><span class="kw">def</span> <span class="fn">repeat</span><span class="dn">(</span><span class="dn">n</span><span class="dn">):</span>
+    <span class="kw">def</span> <span class="fn">decorator</span><span class="dn">(</span><span class="dn">func</span><span class="dn">):</span>
+        <span class="op">@</span><span class="fn">wraps</span><span class="dn">(</span><span class="dn">func</span><span class="dn">)</span>
+        <span class="kw">def</span> <span class="fn">wrapper</span><span class="dn">(</span><span class="op">*</span><span class="dn">args</span><span class="op">, **</span><span class="dn">kw</span><span class="dn">):</span>
+            <span class="kw">for</span> <span class="dn">_</span> <span class="kw">in</span> <span class="fn">range</span><span class="dn">(</span><span class="dn">n</span><span class="dn">):</span>
+                <span class="fn">func</span><span class="dn">(</span><span class="op">*</span><span class="dn">args</span><span class="op">, **</span><span class="dn">kw</span><span class="dn">)</span>
+        <span class="kw">return</span> <span class="dn">wrapper</span>
+    <span class="kw">return</span> <span class="dn">decorator</span>
+
+<span class="op">@</span><span class="fn">repeat</span><span class="dn">(</span><span class="nm">3</span><span class="dn">)</span>
+<span class="kw">def</span> <span class="fn">hello</span><span class="dn">():</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"Hello!"</span><span class="dn">)</span>
+
+<span class="fn">hello</span><span class="dn">()</span>   <span class="cm"># prints "Hello!" 3 times</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── ERROR HANDLING ───────────── -->
+  <div class="section" id="errors">
+    <div class="section-title"><h2>Error Handling </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">try / except / else / finally</div>
+        <pre><span class="kw">try</span><span class="op">:</span>
+    <span class="dn">result</span> <span class="op">=</span> <span class="nm">10</span> <span class="op">/</span> <span class="nm">0</span>
+<span class="kw">except</span> <span class="cl">ZeroDivisionError</span> <span class="kw">as</span> <span class="dn">e</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">f"Error: </span><span class="kw">{</span><span class="dn">e</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>
+<span class="kw">except</span> <span class="dn">(</span><span class="cl">TypeError</span><span class="op">, </span><span class="cl">ValueError</span><span class="dn">)</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"Type or value error"</span><span class="dn">)</span>
+<span class="kw">except</span> <span class="cl">Exception</span> <span class="kw">as</span> <span class="dn">e</span><span class="op">:</span>       <span class="cm"># catch-all</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="dn">e</span><span class="dn">)</span>
+<span class="kw">else</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"No error!"</span><span class="dn">)</span>         <span class="cm"># runs if no exception</span>
+<span class="kw">finally</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"Always runs"</span><span class="dn">)</span>       <span class="cm"># cleanup</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Custom exceptions &amp; raising</div>
+        <pre><span class="kw">class</span> <span class="cl">InsufficientFundsError</span><span class="dn">(</span><span class="cl">Exception</span><span class="dn">):</span>
+    <span class="kw">def</span> <span class="fn">__init__</span><span class="dn">(</span><span class="dn">self</span><span class="op">, </span><span class="dn">amount</span><span class="dn">):</span>
+        <span class="fn">super</span><span class="dn">()</span><span class="op">.</span><span class="fn">__init__</span><span class="dn">(</span><span class="st">f"Need </span><span class="kw">{</span><span class="dn">amount</span><span class="kw">}</span><span class="st"> more"</span><span class="dn">)</span>
+
+<span class="kw">def</span> <span class="fn">withdraw</span><span class="dn">(</span><span class="dn">balance</span><span class="op">, </span><span class="dn">amount</span><span class="dn">):</span>
+    <span class="kw">if</span> <span class="dn">amount</span> <span class="op">&gt;</span> <span class="dn">balance</span><span class="op">:</span>
+        <span class="kw">raise</span> <span class="cl">InsufficientFundsError</span><span class="dn">(</span><span class="dn">amount</span> <span class="op">-</span> <span class="dn">balance</span><span class="dn">)</span>
+    <span class="kw">return</span> <span class="dn">balance</span> <span class="op">-</span> <span class="dn">amount</span>
+
+<span class="kw">try</span><span class="op">:</span>
+    <span class="fn">withdraw</span><span class="dn">(</span><span class="nm">100</span><span class="op">, </span><span class="nm">200</span><span class="dn">)</span>
+<span class="kw">except</span> <span class="cl">InsufficientFundsError</span> <span class="kw">as</span> <span class="dn">e</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="dn">e</span><span class="dn">)</span>   <span class="cm"># Need 100 more</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Common built-in exceptions</div>
+        <table>
+          <tr><th>Exception</th><th>When</th></tr>
+          <tr><td>ValueError</td><td class="plain">Wrong value type</td></tr>
+          <tr><td>TypeError</td><td class="plain">Wrong argument type</td></tr>
+          <tr><td>KeyError</td><td class="plain">Dict key missing</td></tr>
+          <tr><td>IndexError</td><td class="plain">List index out of range</td></tr>
+          <tr><td>AttributeError</td><td class="plain">Attribute doesn't exist</td></tr>
+          <tr><td>ZeroDivisionError</td><td class="plain">Divide by zero</td></tr>
+          <tr><td>FileNotFoundError</td><td class="plain">File doesn't exist</td></tr>
+          <tr><td>ImportError</td><td class="plain">Module not found</td></tr>
+          <tr><td>StopIteration</td><td class="plain">Generator exhausted</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">Context managers</div>
+        <pre><span class="cm"># with statement — auto cleanup</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"file.txt"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">data</span> <span class="op">=</span> <span class="dn">f</span><span class="op">.</span><span class="fn">read</span><span class="dn">()</span>
+<span class="cm"># file auto-closed here</span>
+
+<span class="cm"># Custom context manager</span>
+<span class="kw">from</span> <span class="dn">contextlib</span> <span class="kw">import</span> <span class="dn">contextmanager</span>
+
+<span class="op">@</span><span class="dn">contextmanager</span>
+<span class="kw">def</span> <span class="fn">managed_resource</span><span class="dn">():</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"setup"</span><span class="dn">)</span>
+    <span class="kw">yield</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"teardown"</span><span class="dn">)</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── FILE I/O ───────────── -->
+  <div class="section" id="files">
+    <div class="section-title"><h2>File I/O </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Reading files</div>
+        <pre><span class="cm"># Read entire file</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"data.txt"</span><span class="op">, </span><span class="st">"r"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">content</span> <span class="op">=</span> <span class="dn">f</span><span class="op">.</span><span class="fn">read</span><span class="dn">()</span>
+
+<span class="cm"># Read line by line (memory efficient)</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"data.txt"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="kw">for</span> <span class="dn">line</span> <span class="kw">in</span> <span class="dn">f</span><span class="op">:</span>
+        <span class="fn">print</span><span class="dn">(</span><span class="dn">line</span><span class="op">.</span><span class="fn">strip</span><span class="dn">())</span>
+
+<span class="cm"># Read all lines as list</span>
+<span class="dn">lines</span> <span class="op">=</span> <span class="dn">f</span><span class="op">.</span><span class="fn">readlines</span><span class="dn">()</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Writing files</div>
+        <pre><span class="cm"># Write (overwrites existing)</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"out.txt"</span><span class="op">, </span><span class="st">"w"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">f</span><span class="op">.</span><span class="fn">write</span><span class="dn">(</span><span class="st">"Hello, G!\n"</span><span class="dn">)</span>
+
+<span class="cm"># Append to existing file</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"out.txt"</span><span class="op">, </span><span class="st">"a"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">f</span><span class="op">.</span><span class="fn">write</span><span class="dn">(</span><span class="st">"More text\n"</span><span class="dn">)</span>
+
+<span class="cm"># Write multiple lines</span>
+<span class="dn">lines</span> <span class="op">=</span> <span class="dn">[</span><span class="st">"line1\n"</span><span class="op">, </span><span class="st">"line2\n"</span><span class="dn">]</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"out.txt"</span><span class="op">, </span><span class="st">"w"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">f</span><span class="op">.</span><span class="fn">writelines</span><span class="dn">(</span><span class="dn">lines</span><span class="dn">)</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">File modes</div>
+        <table>
+          <tr><th>Mode</th><th>Meaning</th></tr>
+          <tr><td>"r"</td><td class="plain">Read (default)</td></tr>
+          <tr><td>"w"</td><td class="plain">Write (creates/overwrites)</td></tr>
+          <tr><td>"a"</td><td class="plain">Append</td></tr>
+          <tr><td>"x"</td><td class="plain">Create (fails if exists)</td></tr>
+          <tr><td>"b"</td><td class="plain">Binary mode (e.g. "rb")</td></tr>
+          <tr><td>"+"</td><td class="plain">Read+write (e.g. "r+")</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">JSON &amp; CSV</div>
+        <pre><span class="kw">import</span> <span class="dn">json</span>
+
+<span class="cm"># Write JSON</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"data.json"</span><span class="op">, </span><span class="st">"w"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">json</span><span class="op">.</span><span class="fn">dump</span><span class="dn">(</span><span class="dn">my_dict</span><span class="op">, </span><span class="dn">f</span><span class="op">, </span><span class="dn">indent</span><span class="op">=</span><span class="nm">2</span><span class="dn">)</span>
+
+<span class="cm"># Read JSON</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"data.json"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">data</span> <span class="op">=</span> <span class="dn">json</span><span class="op">.</span><span class="fn">load</span><span class="dn">(</span><span class="dn">f</span><span class="dn">)</span>
+
+<span class="kw">import</span> <span class="dn">csv</span>
+<span class="kw">with</span> <span class="fn">open</span><span class="dn">(</span><span class="st">"data.csv"</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">f</span><span class="op">:</span>
+    <span class="dn">reader</span> <span class="op">=</span> <span class="dn">csv</span><span class="op">.</span><span class="fn">DictReader</span><span class="dn">(</span><span class="dn">f</span><span class="dn">)</span>
+    <span class="kw">for</span> <span class="dn">row</span> <span class="kw">in</span> <span class="dn">reader</span><span class="op">:</span>
+        <span class="fn">print</span><span class="dn">(</span><span class="dn">row</span><span class="dn">)</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── MODULES ───────────── -->
+  <div class="section" id="modules">
+    <div class="section-title"><h2>Modules &amp; Packages </h2><span class="tag tag-i">Intermediate</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Importing</div>
+        <pre><span class="kw">import</span> <span class="dn">math</span>
+<span class="kw">import</span> <span class="dn">math</span> <span class="kw">as</span> <span class="dn">m</span>
+<span class="kw">from</span> <span class="dn">math</span> <span class="kw">import</span> <span class="dn">sqrt</span><span class="op">, </span><span class="dn">pi</span>
+<span class="kw">from</span> <span class="dn">math</span> <span class="kw">import</span> <span class="op">*</span>         <span class="cm"># avoid this</span>
+
+<span class="cm"># Useful stdlib modules</span>
+<span class="kw">import</span> <span class="dn">os</span>           <span class="cm"># OS operations</span>
+<span class="kw">import</span> <span class="dn">sys</span>          <span class="cm"># system info</span>
+<span class="kw">import</span> <span class="dn">re</span>           <span class="cm"># regex</span>
+<span class="kw">import</span> <span class="dn">json</span>         <span class="cm"># JSON</span>
+<span class="kw">import</span> <span class="dn">datetime</span>     <span class="cm"># dates</span>
+<span class="kw">import</span> <span class="dn">collections</span>  <span class="cm"># advanced types</span>
+<span class="kw">import</span> <span class="dn">itertools</span>    <span class="cm"># iteration tools</span>
+<span class="kw">import</span> <span class="dn">functools</span>    <span class="cm"># higher order fns</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Creating your own module</div>
+        <pre><span class="cm"># mymodule.py</span>
+<span class="kw">def</span> <span class="fn">greet</span><span class="dn">(</span><span class="dn">name</span><span class="dn">):</span>
+    <span class="kw">return</span> <span class="st">f"Hello, </span><span class="kw">{</span><span class="dn">name</span><span class="kw">}</span><span class="st">!"</span>
+
+<span class="cl">PI</span> <span class="op">=</span> <span class="nm">3.14159</span>
+
+<span class="cm"># main.py</span>
+<span class="kw">import</span> <span class="dn">mymodule</span>
+<span class="fn">print</span><span class="dn">(</span><span class="dn">mymodule</span><span class="op">.</span><span class="fn">greet</span><span class="dn">(</span><span class="st">"G"</span><span class="dn">))</span>
+<span class="fn">print</span><span class="dn">(</span><span class="dn">mymodule</span><span class="op">.</span><span class="cl">PI</span><span class="dn">)</span>
+
+<span class="cm"># __name__ guard</span>
+<span class="kw">if</span> <span class="dn">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span><span class="op">:</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">"Running directly"</span><span class="dn">)</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── REGEX ───────────── -->
+  <div class="section" id="regex">
+    <div class="section-title"><h2>Regular Expressions </h2><span class="tag tag-a">Advanced</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">re module basics</div>
+        <pre><span class="kw">import</span> <span class="dn">re</span>
+
+<span class="dn">text</span> <span class="op">=</span> <span class="st">"My email is g@example.com"</span>
+
+<span class="cm"># Search — find first match</span>
+<span class="dn">m</span> <span class="op">=</span> <span class="dn">re</span><span class="op">.</span><span class="fn">search</span><span class="dn">(</span><span class="st">r'\w+@\w+\.\w+'</span><span class="op">, </span><span class="dn">text</span><span class="dn">)</span>
+<span class="dn">m</span><span class="op">.</span><span class="fn">group</span><span class="dn">()</span>    <span class="cm"># "g@example.com"</span>
+
+<span class="cm"># Findall — all matches</span>
+<span class="dn">re</span><span class="op">.</span><span class="fn">findall</span><span class="dn">(</span><span class="st">r'\d+'</span><span class="op">, </span><span class="st">"3 cats, 10 dogs"</span><span class="dn">)</span>
+<span class="cm"># ['3', '10']</span>
+
+<span class="cm"># Sub — replace</span>
+<span class="dn">re</span><span class="op">.</span><span class="fn">sub</span><span class="dn">(</span><span class="st">r'\d+'</span><span class="op">, </span><span class="st">'#'</span><span class="op">, </span><span class="st">"3 cats, 10 dogs"</span><span class="dn">)</span>
+<span class="cm"># "# cats, # dogs"</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Pattern quick reference</div>
+        <table>
+          <tr><th>Pattern</th><th>Matches</th></tr>
+          <tr><td>.</td><td class="plain">Any char except newline</td></tr>
+          <tr><td>\d</td><td class="plain">Digit [0-9]</td></tr>
+          <tr><td>\w</td><td class="plain">Word char [a-zA-Z0-9_]</td></tr>
+          <tr><td>\s</td><td class="plain">Whitespace</td></tr>
+          <tr><td>^</td><td class="plain">Start of string</td></tr>
+          <tr><td>$</td><td class="plain">End of string</td></tr>
+          <tr><td>*</td><td class="plain">0 or more</td></tr>
+          <tr><td>+</td><td class="plain">1 or more</td></tr>
+          <tr><td>?</td><td class="plain">0 or 1 (optional)</td></tr>
+          <tr><td>{n,m}</td><td class="plain">Between n and m times</td></tr>
+          <tr><td>[abc]</td><td class="plain">Character class</td></tr>
+          <tr><td>(group)</td><td class="plain">Capture group</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ───────────── ASYNC ───────────── -->
+  <div class="section" id="async">
+    <div class="section-title"><h2>Async / Await </h2><span class="tag tag-a">Advanced</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Basics</div>
+        <pre><span class="kw">import</span> <span class="dn">asyncio</span>
+
+<span class="kw">async def</span> <span class="fn">fetch_data</span><span class="dn">(</span><span class="dn">url</span><span class="dn">):</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">f"Fetching </span><span class="kw">{</span><span class="dn">url</span><span class="kw">}</span><span class="st">"</span><span class="dn">)</span>
+    <span class="kw">await</span> <span class="dn">asyncio</span><span class="op">.</span><span class="fn">sleep</span><span class="dn">(</span><span class="nm">1</span><span class="dn">)</span>    <span class="cm"># non-blocking wait</span>
+    <span class="kw">return</span> <span class="dn">{</span><span class="st">"data"</span><span class="op">: </span><span class="st">"result"</span><span class="dn">}</span>
+
+<span class="kw">async def</span> <span class="fn">main</span><span class="dn">():</span>
+    <span class="dn">result</span> <span class="op">=</span> <span class="kw">await</span> <span class="fn">fetch_data</span><span class="dn">(</span><span class="st">"api/v1"</span><span class="dn">)</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="dn">result</span><span class="dn">)</span>
+
+<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">main</span><span class="dn">())</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">Concurrent tasks</div>
+        <pre><span class="kw">import</span> <span class="dn">asyncio</span>
+
+<span class="kw">async def</span> <span class="fn">task</span><span class="dn">(</span><span class="dn">name</span><span class="op">, </span><span class="dn">delay</span><span class="dn">):</span>
+    <span class="kw">await</span> <span class="dn">asyncio</span><span class="op">.</span><span class="fn">sleep</span><span class="dn">(</span><span class="dn">delay</span><span class="dn">)</span>
+    <span class="fn">print</span><span class="dn">(</span><span class="st">f"</span><span class="kw">{</span><span class="dn">name</span><span class="kw">}</span><span class="st"> done"</span><span class="dn">)</span>
+
+<span class="kw">async def</span> <span class="fn">main</span><span class="dn">():</span>
+    <span class="cm"># Run concurrently — not one by one!</span>
+    <span class="kw">await</span> <span class="dn">asyncio</span><span class="op">.</span><span class="fn">gather</span><span class="dn">(</span>
+        <span class="fn">task</span><span class="dn">(</span><span class="st">"A"</span><span class="op">, </span><span class="nm">2</span><span class="dn">)</span><span class="op">,</span>
+        <span class="fn">task</span><span class="dn">(</span><span class="st">"B"</span><span class="op">, </span><span class="nm">1</span><span class="dn">)</span><span class="op">,</span>
+        <span class="fn">task</span><span class="dn">(</span><span class="st">"C"</span><span class="op">, </span><span class="nm">3</span><span class="dn">)</span><span class="op">,</span>
+    <span class="dn">)</span>
+<span class="cm"># Total: ~3s, not 6s</span></pre>
+      </div>
+      <div class="card">
+        <div class="card-title">async / sync — key concepts</div>
+        <table>
+          <tr><th>Concept</th><th>Meaning</th></tr>
+          <tr><td>async def</td><td class="plain">Defines a coroutine</td></tr>
+          <tr><td>await</td><td class="plain">Pause until result is ready</td></tr>
+          <tr><td>asyncio.run()</td><td class="plain">Entry point — runs event loop</td></tr>
+          <tr><td>asyncio.gather()</td><td class="plain">Run multiple coroutines concurrently</td></tr>
+          <tr><td>asyncio.sleep()</td><td class="plain">Non-blocking wait</td></tr>
+          <tr><td>asyncio.create_task()</td><td class="plain">Schedule task without awaiting</td></tr>
+        </table>
+        <div class="tip">Use async for I/O bound tasks — HTTP calls, DB queries, file reads. Use multiprocessing for CPU-heavy tasks.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">async with aiohttp (HTTP)</div>
+        <pre><span class="cm"># pip install aiohttp</span>
+<span class="kw">import</span> <span class="dn">aiohttp</span>
+<span class="kw">import</span> <span class="dn">asyncio</span>
+
+<span class="kw">async def</span> <span class="fn">fetch</span><span class="dn">(</span><span class="dn">url</span><span class="dn">):</span>
+    <span class="kw">async with</span> <span class="dn">aiohttp</span><span class="op">.</span><span class="cl">ClientSession</span><span class="dn">()</span> <span class="kw">as</span> <span class="dn">session</span><span class="op">:</span>
+        <span class="kw">async with</span> <span class="dn">session</span><span class="op">.</span><span class="fn">get</span><span class="dn">(</span><span class="dn">url</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">resp</span><span class="op">:</span>
+            <span class="kw">return</span> <span class="kw">await</span> <span class="dn">resp</span><span class="op">.</span><span class="fn">json</span><span class="dn">()</span>
+
+<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">fetch</span><span class="dn">(</span><span class="st">"https://api.example.com"</span><span class="dn">))</span></pre>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  ✨ Made with 💻 + ☕ while learning Python &nbsp;&middot;&nbsp; By Sai Goutham Karanam ✨
+</footer>
+
+</body>
+</html>
