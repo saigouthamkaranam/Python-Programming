@@ -1172,4 +1172,64 @@ footer {
         <span class="kw">async with</span> <span class="dn">session</span><span class="op">.</span><span class="fn">get</span><span class="dn">(</span><span class="dn">url</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">resp</span><span class="op">:</span>
             <span class="kw">return</span> <span class="kw">await</span> <span class="dn">resp</span><span class="op">.</span><span class="fn">json</span><span class="dn">()</span>
 
-<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">fetch</span><span class="dn">(</span><span class="st">"https:/
+<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">fetch</span><span class="dn">(</span><span class="st">"https:/<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">fetch</span><span class="dn">(</span><span class="st">"https://api.example.com"</span><span class="dn">))</span></pre>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  ✨ Made with 💻 + ☕ while learning Python &nbsp;&middot;&nbsp; By Sai Goutham Karanam ✨
+</footer>
+
+<!-- ── DOWNLOAD BUTTON ── -->
+<button onclick="window.print()" id="dl-btn" title="Save as PDF">
+  ↓ Download PDF
+</button>
+
+<style>
+#dl-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--violet);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(91,79,207,0.35);
+  transition: background 0.15s, transform 0.1s;
+  z-index: 999;
+}
+#dl-btn:hover { background: #4a3fbf; transform: translateY(-1px); }
+#dl-btn:active { transform: scale(0.97); }
+
+@media print {
+  #dl-btn, .toc { display: none !important; }
+  body { background: #fff !important; color: #111 !important; }
+  .hero { padding: 2rem !important; }
+  .container { padding: 1rem 2rem !important; }
+  .card { break-inside: avoid; border: 1px solid #ddd !important; background: #fff !important; }
+  pre { background: #f5f5f5 !important; border: 1px solid #ddd !important; font-size: 10px !important; }
+  .section { margin-bottom: 2rem !important; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr 1fr !important; }
+  .hero h1 { font-size: 2.5rem !important; }
+  footer { display: block !important; }
+  .kw { color: #5b4fcf !important; }
+  .fn { color: #1a5fa8 !important; }
+  .st { color: #b07820 !important; }
+  .nm { color: #0e8f73 !important; }
+  .cl { color: #b03060 !important; }
+  .cm { color: #aaa !important; }
+  .dn { color: #333 !important; }
+}
+</style>
+
+</body>
+</html>
