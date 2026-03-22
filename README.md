@@ -76,7 +76,7 @@ Hands-on projects built while learning Python fundamentals — covering function
 
 Coding challenges and problem-solving exercises — focused on sharpening logic, data structures and algorithmic thinking.
 
-> [Located in](https://saigouthamkaranam.github.com/Python-Programming/Practice_Problems)
+> [Repo](https://github.com/saigouthamkaranam/Python-Programming/tree/main/Practice_Problems)
 
 ---
 
@@ -84,7 +84,7 @@ Coding challenges and problem-solving exercises — focused on sharpening logic,
 
 Interactive data applications and dashboards built with Streamlit.
 
-> [Located in](https://saigouthamkaranam.github.com/Python-Programming/Streamlit)
+> [Repo](https://github.com/saigouthamkaranam/Python-Programming/tree/main/Streamlit)
 
 ---
 
