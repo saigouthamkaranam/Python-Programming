@@ -896,6 +896,6 @@ print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
 
 <div align="center">
 
-**Made with 💻 + ☕ while learning Python**
+**✨ Made with 💻 + ☕ while learning Python - `By Sai Goutham Karanam` ✨**
 
 </div>
