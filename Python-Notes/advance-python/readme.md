@@ -679,6 +679,6 @@ acc1.balance    # ✅ access only through getter/setter
 
 <div align="center">
 
-**Made with 💻 + ☕ while learning Python**
+**✨ Made with 💻 + ☕ while learning Python - `By Sai Goutham Karanam` ✨**
 
 </div>
