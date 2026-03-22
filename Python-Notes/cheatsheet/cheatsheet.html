@@ -327,6 +327,72 @@ footer {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+  .hero h1 {
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+  }
+  .hero-sub {
+    font-size: 11px;
+  }
+  .toc {
+    padding: 0 1rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  .toc a {
+    padding: 10px 10px;
+    font-size: 9px;
+  }
+  .container {
+    padding: 2rem 1.5rem;
+  }
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section-title h2 {
+    font-size: 1.4rem;
+  }
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  pre {
+    font-size: 11px;
+    padding: 0.8rem;
+  }
+  table {
+    font-size: 11.5px;
+  }
+  td, th {
+    padding: 5px 7px;
+  }
+  .card {
+    padding: 1rem 1.1rem;
+  }
+  footer {
+    padding: 2rem 1.5rem;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  .badges {
+    gap: 5px;
+  }
+  .badge {
+    font-size: 9px;
+    padding: 3px 9px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1009,11 +1075,11 @@ footer {
         <div class="card-title">re module basics</div>
         <pre><span class="kw">import</span> <span class="dn">re</span>
 
-<span class="dn">text</span> <span class="op">=</span> <span class="st">"My email is g@example.com"</span>
+<span class="dn">text</span> <span class="op">=</span> <span class="st">"My email is <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e384a3869b828e938f86cd808c8e">[email&#160;protected]</a>"</span>
 
 <span class="cm"># Search — find first match</span>
 <span class="dn">m</span> <span class="op">=</span> <span class="dn">re</span><span class="op">.</span><span class="fn">search</span><span class="dn">(</span><span class="st">r'\w+@\w+\.\w+'</span><span class="op">, </span><span class="dn">text</span><span class="dn">)</span>
-<span class="dn">m</span><span class="op">.</span><span class="fn">group</span><span class="dn">()</span>    <span class="cm"># "g@example.com"</span>
+<span class="dn">m</span><span class="op">.</span><span class="fn">group</span><span class="dn">()</span>    <span class="cm"># "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="234463465b424e534f460d404c4e">[email&#160;protected]</a>"</span>
 
 <span class="cm"># Findall — all matches</span>
 <span class="dn">re</span><span class="op">.</span><span class="fn">findall</span><span class="dn">(</span><span class="st">r'\d+'</span><span class="op">, </span><span class="st">"3 cats, 10 dogs"</span><span class="dn">)</span>
@@ -1106,16 +1172,4 @@ footer {
         <span class="kw">async with</span> <span class="dn">session</span><span class="op">.</span><span class="fn">get</span><span class="dn">(</span><span class="dn">url</span><span class="dn">)</span> <span class="kw">as</span> <span class="dn">resp</span><span class="op">:</span>
             <span class="kw">return</span> <span class="kw">await</span> <span class="dn">resp</span><span class="op">.</span><span class="fn">json</span><span class="dn">()</span>
 
-<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">fetch</span><span class="dn">(</span><span class="st">"https://api.example.com"</span><span class="dn">))</span></pre>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  ✨ Made with 💻 + ☕ while learning Python &nbsp;&middot;&nbsp; By Sai Goutham Karanam ✨
-</footer>
-
-</body>
-</html>
+<span class="dn">asyncio</span><span class="op">.</span><span class="fn">run</span><span class="dn">(</span><span class="fn">fetch</span><span class="dn">(</span><span class="st">"https:/
