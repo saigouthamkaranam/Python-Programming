@@ -1,30 +1,102 @@
-# 🚀 Python-Programming
+# 🚀 Python Programming
 
-This repo Consists of the different projects related to python programming that i have developed while i was learning Python
+> A curated collection of Python projects, practice problems, and learning notes — built while going from zero to backend engineer.
 
-### They have been arranged into Three categories 
-- Beginner Level Projects
-- Intermediate Level Projects
-- Advance Level Projects
+**[📖 View Python Cheatsheet →](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet.html)**
 
-# 📌 TABLE OF CONTENTS
+---
 
-### ✨ BEGINNER LEVEL PROJECTS ✨
-  
-  |Sno |Title  |
-  --- | --- | 
-  |1|[YouTube Channel Name Generator](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/1%20-%20YouTube%20Channel%20Name%20Generator)|
-  |2|[BMI Calculator](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/2%20-%20BMI%20Calculator)|
-  |3|[Bill Plus Tip Splitter](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/3%20-%20Bill%20Plus%20Tip%20Splitter)|
-  |4|[Age Convertor](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/3%20-%20Bill%20Plus%20Tip%20Splitter)|
-  |5|[Tresure Island](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/4%20-%20Age%20Convertor)|
-  |6|[Rock, Paper, Scissors Game](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/6%20-%20ROCK%2C%20PAPER%2C%20SCISSORS%20Game)|
-  |7|[Password Generator](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/7%20-%20Password%20Generator)|
-  |8|[Hangman Game](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/8%20-%20Hangman%20Game)|
-  |9|[Caeser Cipher](https://github.com/Gouthique/Python-Programming/tree/main/Beginer-Level-Projects/9%20-%20Caeser%20Cipher)|
-  |10|[The Auction Program]|
-  |11|[The Black Jack]|
-  |12|[To Be Annnounced]|
-  |13|[Under Progress..]|
+## 📌 Table of Contents
 
-✨Thanks for visiting✨
+- [About](#about)
+- [Repository Structure](#repository-structure)
+- [Beginner Level Projects](#-beginner-level-projects)
+- [Practice Problems](#-practice-problems)
+- [Python Notes](#-python-notes)
+- [Streamlit Projects](#-streamlit-projects)
+- [Tech Stack](#tech-stack)
+
+---
+
+## About
+
+This repository documents my full Python learning journey — from writing my first script to building AI-powered systems. Every folder represents a different stage: hands-on projects, problem solving, and structured notes covering everything from OOP to async/await.
+
+---
+
+## Repository Structure
+
+```
+Python-Programming/
+├── Beginner-Level-Projects/   # First Python projects — logic, games, utilities
+├── Practice_Problems/         # Coding challenges and problem solving
+├── Python-Notes/              # Structured learning notes + visual cheatsheet
+├── Streamlit/                 # Data apps and dashboards built with Streamlit
+└── practice_projects/         # Experimental builds and mini-projects
+```
+
+---
+
+## 🟢 Beginner Level Projects
+
+Hands-on projects built while learning Python fundamentals — covering functions, loops, data structures and logic.
+
+| # | Project | Description |
+|---|---|---|
+| 1 | YouTube Channel Name Generator | Generates creative channel name ideas |
+| 2 | BMI Calculator | Calculates Body Mass Index from user input |
+| 3 | Bill Plus Tip Splitter | Splits restaurant bills with tip calculation |
+| 4 | Age Convertor | Converts age into days, hours, minutes |
+| 5 | Treasure Island | Text-based adventure game |
+| 6 | Rock, Paper, Scissors | Classic game against the computer |
+| 7 | Password Generator | Generates secure random passwords |
+| 8 | Hangman Game | Word guessing game with ASCII art |
+| 9 | Caesar Cipher | Encrypts and decrypts text using Caesar cipher |
+| 10 | The Auction Program | Simulates a blind auction |
+| 11 | The Blackjack | Playable Blackjack card game |
+
+---
+
+## 🟡 Practice Problems
+
+Coding challenges and problem-solving exercises — focused on sharpening logic, data structures and algorithmic thinking.
+
+> Located in `/Practice_Problems`
+
+---
+
+## 📓 Python Notes
+
+Structured learning notes written while studying Python — from variables to advanced OOP, generators, decorators, async and more.
+
+| File | Covers |
+|---|---|
+| [`cheatsheet.html`](./Python-Notes/cheatsheet.html) | Full visual cheatsheet — Beginner to Advanced |
+| [`README_basics.md`](./Python-Notes/README_basics.md) | Chapter 1 — Variables, Loops, Functions, Data Structures |
+| [`README.md`](./Python-Notes/README.md) | Chapter 2 — OOP, Inheritance, Decorators, MRO |
+
+**👉 [View the live styled cheatsheet](https://saigouthamkaranam.github.io/Python-Programming/Python-Notes/cheatsheet.html)**
+
+---
+
+## 🔵 Streamlit Projects
+
+Interactive data applications and dashboards built with Streamlit.
+
+> Located in `/Streamlit`
+
+---
+
+## Tech Stack
+
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white)
+
+---
+
+<div align="center">
+
+✨ Made with 💻 + ☕ while learning Python &nbsp;·&nbsp; By Sai Goutham Karanam ✨
+
+</div>
