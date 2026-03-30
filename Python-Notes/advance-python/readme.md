@@ -22,7 +22,16 @@
   - [2.12 Static Methods](#212-static-methods)
   - [2.13 Class Methods](#213-class-methods)
   - [2.14 Property Decorators — Getters & Setters](#214-property-decorators--getters--setters)
-- [Chapter 3 — Error Handling](#chapter-3-error-handling)
+- [Chapter 3 — Error Handling](#chapter-3--error-handling)
+  - [3.1 Try-Except](#31-try-except)
+  - [3.2 Try-Except-Else-Finally](#32-try-except-else-finally)
+  - [3.3 Handling Multiple Exceptions](#33-handling-multiple-exceptions)
+  - [3.4 Raising Exceptions](#34-raising-exceptions)
+  - [3.5 Custom Exceptions](#35-custom-exceptions)
+  - [3.6 Common Built-in Exceptions](#36-common-built-in-exceptions)
+  - [3.7 File I/O](#37-file-io)
+  - [3.8 File Handling using Try-Except](#38-file-handling-using-try-except)
+ 
 
 ---
 
@@ -673,12 +682,395 @@ acc1.balance    # ✅ access only through getter/setter
 
 ## Chapter 3 — Error Handling
 
-> 🚧 *Coming soon...*
-
 ---
 
+### 3.1 Try-Except
+ 
+We use `try-except` to handle a program gracefully from crashing in case of an exception or error during runtime.
+ 
+When something goes wrong at runtime (like accessing a key that doesn't exist), Python stops the entire program right there. To get past this, we use **exception handling** with `try` and `except` blocks.
+ 
+#### ❌ Without Exception Handling
+ 
+```python
+car_parts = {"wheels": 20, "rim": 10, "seat_covers": 10, "spray_paint": 20}
+ 
+print(car_parts["dashcam"])
+ 
+# Output:
+# KeyError: 'dashcam'
+```
+ 
+Since `dashcam` is not a key in the dictionary, Python throws a `KeyError` and the program crashes.
+ 
+#### ✅ With Exception Handling
+ 
+```python
+car_parts = {"wheels": 20, "rim": 10, "seat_covers": 10, "spray_paint": 20}
+ 
+try:
+    print(car_parts["dashcam"])
+except KeyError:
+    print("The key that you are trying to access does not exist")
+ 
+print(car_parts["wheels"])
+ 
+# Output:
+# The key that you are trying to access does not exist
+# 20
+```
+ 
+> The program **does not crash** — it handles the error gracefully and continues executing.
+ 
+---
+ 
+### 3.2 Try-Except-Else-Finally
+ 
+You can extend the `try-except` block with two optional clauses:
+ 
+- `else` → runs **only if no exception occurred**
+- `finally` → **always runs**, no matter what
+ 
+```python
+def paint_car(color):
+    try:
+        print(f"Painting your car {color}!")
+        if color == "unknown":
+            raise ValueError("We don't have this color")
+    except ValueError as e:
+        print("Error:", e)
+    else:
+        print(f"Your car is painted {color}!")
+    finally:
+        print("Next customer please!\n")
+ 
+paint_car("red")
+paint_car("unknown")
+ 
+# Output:
+# Painting your car red!
+# Your car is painted red!
+# Next customer please!
+#
+# Painting your car unknown!
+# Error: We don't have this color
+# Next customer please!
+```
+ 
+#### 📋 Block Summary
+ 
+| Block | When does it run? |
+|---|---|
+| `try` | Always — this is the code you want to attempt |
+| `except` | Only if an exception was raised inside `try` |
+| `else` | Only if NO exception was raised |
+| `finally` | Always — regardless of success or failure |
+ 
+---
+ 
+### 3.3 Handling Multiple Exceptions
+ 
+You can handle different types of errors differently using multiple `except` blocks.
+ 
+```python
+def process_input(value):
+    try:
+        result = 100 / int(value)
+        print(f"Result: {result}")
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero!")
+    except ValueError:
+        print("Error: Invalid input — please enter a number!")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+ 
+process_input(5)        # Result: 20.0
+process_input(0)        # Error: Cannot divide by zero!
+process_input("hello")  # Error: Invalid input — please enter a number!
+```
+ 
+> `Exception` acts as a **catch-all** — always put it last.
+ 
+#### 📦 Catching Multiple Exceptions in One Block
+ 
+```python
+try:
+    value = int(input("Enter a number: "))
+    result = 100 / value
+except (ValueError, ZeroDivisionError) as e:
+    print(f"Handled error: {e}")
+```
+ 
+---
+ 
+### 3.4 Raising Exceptions
+ 
+You can manually trigger an exception using `raise` — useful for enforcing rules in your own code.
+ 
+```python
+def set_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative!")
+    print(f"Age set to {age}")
+ 
+set_age(25)   # Age set to 25
+set_age(-5)   # ValueError: Age cannot be negative!
+```
+ 
+---
+ 
+### 3.5 Custom Exceptions
+ 
+You can create your own exception types by inheriting from `Exception`.
+ 
+```python
+class InsufficientFundsError(Exception):
+    pass
+ 
+def withdraw(balance, amount):
+    if amount > balance:
+        raise InsufficientFundsError("Not enough balance to withdraw!")
+    return balance - amount
+ 
+try:
+    withdraw(500, 1000)
+except InsufficientFundsError as e:
+    print(f"Bank Error: {e}")
+ 
+# Output:
+# Bank Error: Not enough balance to withdraw!
+```
+ 
+> Custom exceptions make your error messages **descriptive and domain-specific** — much easier to debug than generic errors.
+ 
+---
+ 
+### 3.6 Common Built-in Exceptions
+ 
+| Exception | When it occurs |
+|---|---|
+| `ValueError` | Right type, wrong value — `int("hello")` |
+| `TypeError` | Wrong type entirely — `"5" + 5` |
+| `KeyError` | Dict key doesn't exist — `d["missing"]` |
+| `IndexError` | List index out of range — `lst[99]` |
+| `ZeroDivisionError` | Dividing by zero — `10 / 0` |
+| `AttributeError` | Attribute doesn't exist — `obj.unknown` |
+| `FileNotFoundError` | File doesn't exist when opening |
+| `ImportError` | Module can't be imported |
+| `NameError` | Variable used before it's defined |
+| `StopIteration` | Iterator has no more items |
+| `Exception` | Base class — catches everything |
+ 
+> **Key rules:** Handle **specific exceptions first**, then fall back to `Exception` as a last resort.
+ 
+---
+ 
+### 3.7 File I/O
+ 
+File I/O (Input/Output) is how Python **reads from and writes to files** on your system. Think of it like opening a notebook, reading or writing something, and then closing it when you're done.
+ 
+#### 📂 Opening a File — `open()`
+ 
+```python
+file = open("filename.txt", mode)
+```
+ 
+| Mode | What it does |
+|---|---|
+| `"r"` | Read — opens file for reading (default) |
+| `"w"` | Write — creates file or overwrites existing content |
+| `"a"` | Append — adds to the end without overwriting |
+| `"x"` | Create — creates a new file, fails if it already exists |
+| `"rb"` | Read binary — for images, PDFs, etc. |
+| `"wb"` | Write binary — for images, PDFs, etc. |
+ 
+#### 📖 Reading a File
+ 
+```python
+# Read the entire file as one string
+file = open("notes.txt", "r")
+content = file.read()
+print(content)
+file.close()
+ 
+# Read line by line into a list
+file = open("notes.txt", "r")
+lines = file.readlines()
+for line in lines:
+    print(line.strip())
+file.close()
+ 
+# Read one line at a time
+file = open("notes.txt", "r")
+line = file.readline()
+print(line)
+file.close()
+```
+ 
+| Method | What it returns |
+|---|---|
+| `read()` | Entire file as a single string |
+| `readlines()` | List of all lines |
+| `readline()` | One line at a time |
+ 
+#### ✍️ Writing to a File
+ 
+```python
+# Write — creates file or overwrites existing content
+file = open("notes.txt", "w")
+file.write("Hello, G!\n")
+file.write("This is my Python notes file.\n")
+file.close()
+ 
+# Append — adds to the end without erasing existing content
+file = open("notes.txt", "a")
+file.write("Adding a new line at the bottom.\n")
+file.close()
+```
+ 
+> ⚠️ `"w"` mode **erases all existing content** before writing. Use `"a"` if you want to keep what's already there.
+ 
+#### ✅ The Better Way — `with` Statement (Context Manager)
+ 
+Always prefer `with open(...)` over manually calling `open()` and `close()`. It automatically closes the file even if an error occurs.
+ 
+```python
+# Reading
+with open("notes.txt", "r") as file:
+    content = file.read()
+    print(content)
+# File is automatically closed here ✅
+ 
+# Writing
+with open("notes.txt", "w") as file:
+    file.write("Clean and safe file writing!\n")
+ 
+# Appending
+with open("notes.txt", "a") as file:
+    file.write("One more line added.\n")
+```
+ 
+#### 🔁 Iterating Over a File Line by Line
+ 
+```python
+with open("notes.txt", "r") as file:
+    for line in file:
+        print(line.strip())
+```
+ 
+> Most **memory-efficient** way to read large files — reads one line at a time without loading everything into memory. Same concept as generators.
+ 
+#### 🗑️ Other File Operations
+ 
+```python
+import os
+ 
+os.path.exists("notes.txt")             # Check if file exists → True or False
+os.remove("notes.txt")                  # Delete a file
+os.rename("old_name.txt", "new.txt")    # Rename a file
+os.path.getsize("notes.txt")            # Get file size in bytes
+```
+ 
+---
+ 
+### 3.8 File Handling using Try-Except
+ 
+Combining file operations with `try-except` makes your code **safe and crash-proof** — files might not exist, might be locked, or the disk might be full.
+ 
+#### 🔐 Safe File Reading
+ 
+```python
+try:
+    with open("notes.txt", "r") as file:
+        content = file.read()
+        print(content)
+except FileNotFoundError:
+    print("Error: The file does not exist!")
+except PermissionError:
+    print("Error: You don't have permission to read this file!")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+```
+ 
+#### ✍️ Safe File Writing
+ 
+```python
+try:
+    with open("notes.txt", "w") as file:
+        file.write("Writing safely with error handling!\n")
+    print("File written successfully!")
+except PermissionError:
+    print("Error: Cannot write — permission denied!")
+except OSError as e:
+    print(f"OS Error: {e}")
+```
+ 
+#### 🔄 Real World Example — Reading a Config File
+ 
+```python
+def load_config(filepath):
+    try:
+        with open(filepath, "r") as file:
+            config = {}
+            for line in file:
+                line = line.strip()
+                if "=" in line:
+                    key, value = line.split("=", 1)
+                    config[key.strip()] = value.strip()
+            return config
+    except FileNotFoundError:
+        print(f"Config file '{filepath}' not found. Using defaults.")
+        return {}
+    except Exception as e:
+        print(f"Failed to load config: {e}")
+        return {}
+ 
+settings = load_config("config.txt")
+print(settings)
+```
+ 
+#### 🔄 Real World Example — Writing a Log File
+ 
+```python
+def write_log(message, filepath="app.log"):
+    try:
+        with open(filepath, "a") as file:
+            file.write(f"{message}\n")
+    except PermissionError:
+        print("Cannot write to log — permission denied!")
+    except OSError as e:
+        print(f"Log write failed: {e}")
+    else:
+        print(f"Log written: {message}")
+    finally:
+        print("Log operation complete.")
+ 
+write_log("App started")
+write_log("User logged in: G")
+```
+ 
+#### 📋 File I/O + Exception Cheat Sheet
+ 
+| Scenario | Exception to catch |
+|---|---|
+| File doesn't exist | `FileNotFoundError` |
+| No permission to read/write | `PermissionError` |
+| Disk is full | `OSError` |
+| Reading a corrupted binary file | `UnicodeDecodeError` |
+| Any other file error | `OSError` / `Exception` |
+ 
+#### 🧠 Key Takeaways
+ 
+- Always use `with open(...)` — it handles closing automatically, even on errors
+- `"r"` to read, `"w"` to write (overwrites), `"a"` to append, `"x"` to create new
+- Wrap file operations in `try-except` to catch `FileNotFoundError` and `PermissionError`
+- Use `finally` for cleanup logic that must always run
+- For large files, iterate line by line instead of `read()` to save memory
+ 
+---
+ 
 <div align="center">
-
+ 
 **✨ Made with 💻 + ☕ while learning Python - `By Sai Goutham Karanam` ✨**
-
+ 
 </div>
